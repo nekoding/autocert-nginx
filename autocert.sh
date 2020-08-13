@@ -36,15 +36,15 @@ else
  echo -e "${GREEN}[✓] Nginx found${NC}"
 fi
 
-echo "${GREEN}Generate nginx config for${NC} $1" && sleep 3
+echo -e "${GREEN}Generate nginx config for${NC} $1" && sleep 3
 sed "s/%DOMAIN_NAME%/$1/g" _default.txt > $1 && sudo mv $1 /etc/nginx/sites-available/$1
 sudo ln -s /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/$1
 
-echo "${GREEN}Reload nginx configuration ....${NC}" && sleep 3
+echo -e "${GREEN}Reload nginx configuration ....${NC}" && sleep 3
 sudo nginx -t && sudo systemctl reload nginx
 
-echo "${GREEN}Running certbot ....${NC}" && sleep 2
+echo -e "${GREEN}Running certbot ....${NC}" && sleep 2
 sudo certbot --nginx -d $1
 sudo systemctl reload nginx
 
-echo "${GREEN}done.${NC}"
+echo -e "${GREEN}done.${NC}"
